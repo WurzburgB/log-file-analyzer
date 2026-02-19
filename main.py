@@ -18,21 +18,35 @@ from analyzer.parser import parse_logs
 
 print("Please enter the logs you would like to analyse:")
 log = input()
+
 try:
     logs = parse_logs(log)
+except Exception as e:
+    print(e)
+    exit()
+
+# Main program loop
+while True:
+
     print("""
-          Choose what you would like to do, input number\n
-          1. Count all levels\n
-          2. Count specific levels\n
-          3. Filter logs
+        Choose what you would like to do, input number
+
+        1. Count all levels
+        2. Count specific levels
+        3. Filter logs
+        4. Exit
     """)
+
     task = input()
+
     if task == '1':
         print(count_logs_by_level(logs))
+
     elif task == '2':
         print("Please enter level to analyse:")
         level = input().upper()
         print(count_specific_level(logs, level))
+
     elif task == '3':
         print("Leave blank if you dont want to filter by that field.")
 
@@ -53,10 +67,10 @@ try:
 
         results = filter_logs(logs, level=level, date=date, message_contains=message)
         print(results)
+
+    elif task == '4':
+        print("Program exited")
+        break
+
     else:
         print("Invalid option selected.")
-
-except Exception as e:
-    print(e)
-
-

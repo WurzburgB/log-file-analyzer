@@ -10,7 +10,7 @@ Returns:
 
 def count_logs_by_level(logs):
     counts = {}
-    if logs is None:
+    if not isinstance(logs, list):
         raise TypeError("logs must be a list of dictionaries")
 
     for log in logs:
@@ -23,13 +23,13 @@ def count_logs_by_level(logs):
 
 def filter_logs(logs, date=None, level=None, message_contains=None):
     filtered_list = []
-    if logs is None:
+    if not isinstance(logs, list):
         raise TypeError("logs must be a list of dictionaries")
 
     for log in logs:
         if date is not None and date != log["date"]:
             continue
-        if level is not None and level != log["level"]:
+        if level is not None and level.upper() != log["level"].upper():
             continue
         if message_contains is not None and message_contains.lower() not in log["message"].lower():
             continue

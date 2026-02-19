@@ -1,7 +1,19 @@
-"""This module reads a log file and converts
-each valid line into a structured dictionary containing
-date, timestamp, level, and message.
 """
+Reads a log file and converts each valid line into a dictionary.
+
+Each log entry contains:
+    - date
+    - timestamp
+    - level
+    - message
+
+Args:
+    file (str): Path to the log file.
+
+Returns:
+    list[dict]: A list of parsed log entries.
+"""
+
 def parse_logs(file):
     cleaned_lines = []
     parsed_logs = []
