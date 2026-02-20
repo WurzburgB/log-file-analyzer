@@ -40,12 +40,23 @@ while True:
     task = input()
 
     if task == '1':
-        print(count_logs_by_level(logs))
+        if count_logs_by_level(logs):
+            print("Log Counts")
+            print('-' * 14)
+            for key, value in count_logs_by_level(logs).items():
+                print(f"{key:<{9}} {value}")
+        else:
+            print("No results found.")
+
 
     elif task == '2':
-        print("Please enter level to analyse:")
+        print("Please enter level to analyze:")
         level = input().upper()
-        print(count_specific_level(logs, level))
+        count = count_specific_level(logs, level)
+
+        print(f"{level} Count")
+        print('-' * 10)
+        print(count)
 
     elif task == '3':
         print("Leave blank if you dont want to filter by that field.")
@@ -66,7 +77,18 @@ while True:
             message = None
 
         results = filter_logs(logs, level=level, date=date, message_contains=message)
-        print(results)
+
+        if results:
+            # Header
+            print('Results'.center(60))
+            print('-' * 60)
+            print(f"{'Date':<{12}} {'Time':<{14}} {'Level':<{10}} {'Message'}")
+            print('-' * 60)
+            # Results
+            for line in results:
+                print(f"{line['date']:<{12}} {line['timestamp']:<{14}} {line['level']:<{10}} {line['message']}")
+        else:
+            print('No results')
 
     elif task == '4':
         print("Program exited")
