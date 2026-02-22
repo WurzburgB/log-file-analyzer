@@ -7,33 +7,55 @@ Returns:
     dict: A dictionary where keys are log levels
           and values are occurrence counts.
 """
-
 def count_logs_by_level(logs):
-    counts = {}
     if not isinstance(logs, list):
         raise TypeError("logs must be a list of dictionaries")
 
+    counts = {}
+
     for log in logs:
-        level = log["level"]
-        if level not in counts:
-            counts[level] = 1
-        else:
-            counts[level] += 1
+        if not isinstance(log, dict):
+            continue
+
+        level = log.get("level")
+        if not level:
+            continue
+
+        counts[level] = counts.get(level, 0) + 1
+
     return counts
 
+
 def filter_logs(logs, date=None, level=None, message_contains=None):
-    filtered_list = []
     if not isinstance(logs, list):
         raise TypeError("logs must be a list of dictionaries")
 
+    filtered_list = []
+
     for log in logs:
-        if date is not None and date != log["date"]:
+        if not isinstance(log, dict):
             continue
-        if level is not None and level.upper() != log["level"].upper():
+
+        log_date = log.get("date")
+        log_level = log.get("level")
+        log_message = log.get("message")
+
+        # Filter by date
+        if date is not None and log_date != date:
             continue
-        if message_contains is not None and message_contains.lower() not in log["message"].lower():
-            continue
+
+        # Filter by level (case insensitive)
+        if level is not None:
+            if not log_level or log_level.upper() != level.upper():
+                continue
+
+        # Filter by message content (case insensitive)
+        if message_contains is not None:
+            if not log_message or message_contains.lower() not in log_message.lower():
+                continue
+
         filtered_list.append(log)
+
     return filtered_list
 
 
