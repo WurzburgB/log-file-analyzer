@@ -14,7 +14,7 @@ Any parsing or runtime errors are handled gracefully.
 """
 
 from analyzer.analyzer import count_logs_by_level, count_specific_level, filter_logs
-from analyzer.parser import parse_logs
+from parser import parse_logs
 
 logs = None
 

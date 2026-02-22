@@ -3,16 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Log Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Log File Analyzer</h1>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <p>Select a log file:</p>
-        <input type="file" name="logfile">
-        <br><br>
-        <input type="submit" value="upload">
-    </form>
+<h1>Upload Log File</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="logfile">
+    <button type="submit">Upload</button>
+</form>
+
+{% if logs %}
+<h2>Parsed Logs</h2>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Level</th>
+        <th>Message</th>
+    </tr>
+
+    {% for log in logs %}
+    <tr>
+        <td>{{ log.date }}</td>
+        <td>{{ log.timestamp }}</td>
+        <td>{{ log.level }}</td>
+        <td>{{ log.message }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endif %}
 
 </body>
 </html>

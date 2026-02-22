@@ -1,33 +1,28 @@
 from flask import Flask, render_template, request
+import os
+from parser import parse_logs
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    file = request.files['logfile']
 
-    if not file:
-        return 'No file uploaded'
+@app.route("/", methods=["GET", "POST"])
+def index():
+    logs = []
 
-    contents = file.read().decode('utf-8')
-    lines = contents.split()
+    if request.method == "POST":
+        file = request.files["logfile"]
 
-    parsed_logs = []
-    for line in lines:
-        parts = line.split()
-        if len(parts) > 4:
-            log_entry = {
-                "date": parts[0].strip(),
-                "time": parts[1].strip(),
-                "level": parts[2].strip(),
-                "message": parts[3].strip(),
-            }
-            parsed_logs.append(log_entry)
-    return render_template('results.html', logs=parsed_logs)
+        if file:
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+            file.save(filepath)
 
-if __name__ == '__main__':
+            logs = parse_logs(filepath)
+
+    return render_template("index.html", logs=logs)
+
+
+if __name__ == "__main__":
     app.run(debug=True)
