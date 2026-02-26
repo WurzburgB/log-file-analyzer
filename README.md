@@ -45,7 +45,7 @@ It also attempts to automatically detect separators like:
 
 ## Project Structure
 
-log-file-analyzer/
+log-file-analyzer/\n
 │
 ├── static/
 │ ├── css/
