@@ -1,113 +1,75 @@
-/* ===== Base Layout ===== */
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    font-family: Arial, sans-serif;
     background-color: #f4f6f8;
     color: #222;
 }
 
-/* ===== Header ===== */
-
-.header {
+header {
     width: 100%;
-    background-color: #1f2937;
+    background-color: #2c3e50;
     color: white;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-/* ===== Top Controls ===== */
-
-.topbar {
-    width: 100%;
-    padding: 15px 40px;
+    padding: 15px 30px;
     box-sizing: border-box;
 }
 
-.topbar button {
-    background-color: #4f6bed;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
+header h1 {
+    margin: 0;
 }
 
-.topbar button:hover {
-    background-color: #3b55d1;
+.top-controls {
+    padding: 10px 30px;
 }
 
-/* ===== Main Container ===== */
+.dark-mode-toggle {
+    float: right;
+}
 
 .container {
-    max-width: 1000px;
-    margin: 30px auto;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
 }
-
-/* ===== Boxes ===== */
 
 .box {
     background: white;
     padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
-}
-
-.box h2 {
-    margin-top: 0;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-/* ===== Forms ===== */
-
-input, select {
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 8px 14px;
-    border: none;
+    margin-bottom: 20px;
     border-radius: 6px;
-    background-color: #4f6bed;
-    color: white;
-    cursor: pointer;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
 }
-
-button:hover {
-    background-color: #3b55d1;
-}
-
-/* ===== Tables ===== */
 
 table {
     border-collapse: collapse;
     width: 100%;
-    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #f1f3f6;
-    padding: 10px;
-    text-align: left;
+    background-color: #f0f0f0;
 }
 
-td {
-    padding: 10px;
-    border-top: 1px solid #ddd;
+tr:hover {
+    background-color: #f5f5f5;
 }
 
-tr:nth-child(even) {
-    background-color: #fafafa;
+button {
+    padding: 8px 15px;
+    margin: 5px 5px 5px 0;
+    cursor: pointer;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
 }
 
-/* ===== Pagination ===== */
+button:hover {
+    background-color: #2980b9;
+}
 
 .pagination {
     margin-top: 15px;
@@ -119,18 +81,24 @@ tr:nth-child(even) {
     margin: 2px;
     text-decoration: none;
     color: black;
-    border-radius: 4px;
 }
 
 .pagination strong {
     padding: 6px 10px;
     border: 1px solid black;
     background: #ddd;
-    border-radius: 4px;
 }
 
-/* ===== Log Level Colors ===== */
+/* Highlight */
+mark {
+    background-color: #fff176;
+    color: black;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
 
+/* Log level colors */
 .info { background-color: #e7f3ff; }
 .warning { background-color: #fff8e1; }
 .error { background-color: #ffecec; }
@@ -139,36 +107,54 @@ tr:nth-child(even) {
 .fatal { background-color: #ff9999; }
 .trace { background-color: #e6e6ff; }
 
-/* ===== Highlight ===== */
-
-mark {
-    background: yellow;
-    font-weight: bold;
-}
-
-/* ===== Dark Mode ===== */
+/* DARK MODE */
 
 .dark-mode {
-    background-color: #111827;
+    background-color: #1e1e1e;
     color: white;
 }
 
+.dark-mode header {
+    background-color: #111;
+}
+
 .dark-mode .box {
-    background: #1f2937;
+    background: #2b2b2b;
 }
 
 .dark-mode th {
-    background-color: #374151;
+    background-color: #444;
 }
 
-.dark-mode td {
+.dark-mode tr:hover {
+    background-color: #3a3a3a;
+}
+
+.dark-mode td,
+.dark-mode th {
     border-color: #555;
 }
 
-.dark-mode tr:nth-child(even) {
-    background-color: #2a3441;
+.dark-mode .pagination a {
+    color: white;
+    border-color: #666;
 }
 
-.dark-mode .header {
-    background-color: #020617;
+.dark-mode .pagination strong {
+    background: #555;
 }
+
+/* Dark mode */
+.dark-mode mark {
+    background-color: #ffcc00;
+    color: black;
+}
+
+/* Dark mode log levels */
+.dark-mode .info { background-color: #1b3a5a; }
+.dark-mode .warning { background-color: #665500; }
+.dark-mode .error { background-color: #5a1b1b; }
+.dark-mode .debug { background-color: #444; }
+.dark-mode .critical { background-color: #661111; }
+.dark-mode .fatal { background-color: #990000; }
+.dark-mode .trace { background-color: #222266; }
