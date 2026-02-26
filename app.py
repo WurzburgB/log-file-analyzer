@@ -5,7 +5,7 @@ from parser import parse_logs
 app = Flask(__name__)
 app.secret_key = "log-analyzer-secret"
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = "/tmp/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -148,4 +148,4 @@ def export_csv():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
