@@ -1,82 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Log Analyzer</title>
+<meta charset="UTF-8">
+<title>Log Analyzer</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            margin: 40px;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background: white;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-        }
-
-        th {
-            background-color: #eee;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        form {
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 8px 15px;
-            font-size: 16px;
-        }
-    </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </head>
 <body>
 
-<h1>Upload Log File</h1>
+<div class="header">
+Log Analyzer
+</div>
+
+<div class="topbar">
+<button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<div class="container">
+
+<div class="box">
+<h2>Upload Logs</h2>
 
 <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="logfile">
-    <button type="submit">Upload</button>
+<input type="file" name="logfiles" multiple>
+<button type="submit" name="upload">Upload</button>
 </form>
 
+<form method="POST">
+<button type="submit" name="clear_files">Clear Files</button>
+</form>
+
+{% if filenames %}
+<b>Files Loaded:</b>
+<ul>
+{% for file in filenames %}
+<li>{{ file }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+</div>
+
+{% if filenames %}
+<div class="box">
+<h2>Filters</h2>
+
+<form method="POST">
+
+Level:
+<select name="level">
+<option value="ALL">All</option>
+{% for level in detected_levels %}
+<option value="{{ level }}" {% if level_filter == level %}selected{% endif %}>{{ level }}</option>
+{% endfor %}
+</select>
+
+<br>
+
+Date:
+<input type="date" name="date" value="{{ date_filter }}">
+
+<br>
+
+Message:
+<input type="text" name="message" value="{{ message_filter }}">
+
+<br>
+
+<button name="apply_filters">Apply</button>
+<button name="clear_filters">Clear</button>
+
+</form>
+</div>
+{% endif %}
+
+{% if stats.total > 0 %}
+<div class="box">
+<h2>Statistics</h2>
+
+<p>Total: {{ stats.total }}</p>
+
+{% for level,count in stats.items() %}
+{% if level != "total" %}
+<p>{{ level }}: {{ count }}</p>
+{% endif %}
+{% endfor %}
+
+</div>
+{% endif %}
+
+{% if stats.total > 0 %}
+<div class="box">
+<h2>Export</h2>
+<a href="/export"><button>Export CSV</button></a>
+</div>
+{% endif %}
+
 {% if logs %}
-<h2>Parsed Logs</h2>
+<div class="box">
+<h2>Logs</h2>
 
 <table>
-    <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Level</th>
-        <th>Message</th>
-    </tr>
+<tr>
+<th>
+<a href="/?sort=date&order=asc">Date ▲</a>
+<a href="/?sort=date&order=desc">▼</a>
+</th>
+<th>Time</th>
+<th>
+<a href="/?sort=level&order=asc">Level ▲</a>
+<a href="/?sort=level&order=desc">▼</a>
+</th>
+<th>
+<a href="/?sort=message&order=asc">Message ▲</a>
+<a href="/?sort=message&order=desc">▼</a>
+</th>
+</tr>
 
-    {% for log in logs %}
-    <tr>
-        <td>{{ log.date }}</td>
-        <td>{{ log.timestamp }}</td>
-        <td>{{ log.level }}</td>
-        <td>{{ log.message }}</td>
-    </tr>
-    {% endfor %}
-
-</table>
+{% for log in logs %}
+<tr class="{{ log.level.strip().lower() }}">
+<td>{{ log.date }}</td>
+<td>{{ log.timestamp }}</td>
+<td>{{ log.level }}</td>
+<td>
+{% if message_filter %}
+{{ log.message.replace(message_filter, "<mark>" + message_filter + "</mark>") | safe }}
+{% else %}
+{{ log.message }}
 {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+
+<div class="pagination">
+{% for p in range(1, total_pages+1) %}
+{% if p == current_page %}
+<strong>{{ p }}</strong>
+{% else %}
+<a href="/?page={{ p }}">{{ p }}</a>
+{% endif %}
+{% endfor %}
+</div>
+
+</div>
+{% endif %}
+
+</div>
 
 </body>
 </html>

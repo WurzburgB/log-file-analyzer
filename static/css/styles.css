@@ -1,0 +1,174 @@
+/* ===== Base Layout ===== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+/* ===== Header ===== */
+
+.header {
+    width: 100%;
+    background-color: #1f2937;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ===== Top Controls ===== */
+
+.topbar {
+    width: 100%;
+    padding: 15px 40px;
+    box-sizing: border-box;
+}
+
+.topbar button {
+    background-color: #4f6bed;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.topbar button:hover {
+    background-color: #3b55d1;
+}
+
+/* ===== Main Container ===== */
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* ===== Boxes ===== */
+
+.box {
+    background: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+}
+
+.box h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* ===== Forms ===== */
+
+input, select {
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4f6bed;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3b55d1;
+}
+
+/* ===== Tables ===== */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+th {
+    background-color: #f1f3f6;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* ===== Pagination ===== */
+
+.pagination {
+    margin-top: 15px;
+}
+
+.pagination a {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    margin: 2px;
+    text-decoration: none;
+    color: black;
+    border-radius: 4px;
+}
+
+.pagination strong {
+    padding: 6px 10px;
+    border: 1px solid black;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+/* ===== Log Level Colors ===== */
+
+.info { background-color: #e7f3ff; }
+.warning { background-color: #fff8e1; }
+.error { background-color: #ffecec; }
+.debug { background-color: #f0f0f0; }
+.critical { background-color: #ffcccc; }
+.fatal { background-color: #ff9999; }
+.trace { background-color: #e6e6ff; }
+
+/* ===== Highlight ===== */
+
+mark {
+    background: yellow;
+    font-weight: bold;
+}
+
+/* ===== Dark Mode ===== */
+
+.dark-mode {
+    background-color: #111827;
+    color: white;
+}
+
+.dark-mode .box {
+    background: #1f2937;
+}
+
+.dark-mode th {
+    background-color: #374151;
+}
+
+.dark-mode td {
+    border-color: #555;
+}
+
+.dark-mode tr:nth-child(even) {
+    background-color: #2a3441;
+}
+
+.dark-mode .header {
+    background-color: #020617;
+}
