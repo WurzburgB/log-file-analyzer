@@ -21,7 +21,6 @@ This project was built as a portfolio project to demonstrate practical Python de
 - Pagination for large log files
 - Highlighted search matches
 - Export filtered logs to CSV
-- Dark mode toggle
 - Clean and professional interface
 
 ---
@@ -40,31 +39,6 @@ It also attempts to automatically detect separators like:
 - Commas
 - Pipes
 - Tabs
-
----
-
-## Project Structure
-
-log-file-analyzer/
-│
-├── static/
-│ ├── css/
-│ │ └── styles.css
-│ └── js/
-│ └── script.js
-│
-├── templates/
-│ └── index.html
-│
-├── uploads/
-│
-├── data/
-│ └── sample.log
-│
-├── parser.py
-├── app.py
-├── README.md
-
 
 ---
 
